@@ -3,7 +3,7 @@
  * 它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。
  * 走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。
  * 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。
- * 冒泡排序的时间复杂度为O(n^2)
+ * 冒泡排序的时间复杂度为O(n^2)，最优时间复杂度为O(n);
  * @param array  需要排序的数组
  * @param isAsc  是否正序排序
  * @returns array 返回排序后的数组
@@ -22,6 +22,7 @@ function bubbleSort(array, isAsc) {
 
     let temp;
     let end = length;
+    let didSwap = false;  // 是否进行过调换位置
     if (isAsc) {  // 升序
         while (end--) {
             for (let i = 0; i < end; i++) {
@@ -29,7 +30,11 @@ function bubbleSort(array, isAsc) {
                     temp = array[i];
                     array[i] = array[i + 1];
                     array[i + 1] = temp;
+                    didSwap = true;
                 }
+            }
+            if(!didSwap){  // 如果从来没有调换过位置，说明数组内容的顺序本身就满足条件
+                break;
             }
         }
     } else {
@@ -39,7 +44,11 @@ function bubbleSort(array, isAsc) {
                     temp = array[i];
                     array[i] = array[i + 1];
                     array[i + 1] = temp;
+                    didSwap = true;
                 }
+            }
+            if(!didSwap){
+                break;
             }
         }
     }
